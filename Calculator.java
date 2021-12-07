@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.BreakIterator;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,8 +15,11 @@ import javax.swing.SwingConstants;
 
     public class Calculator implements ActionListener{
     // private static final String Font = null;
+    boolean divi,multi,add,subst=false;
     boolean isOpratorClicked=false;
     String oldValue;
+    String suboldValue;
+    float result;
     JFrame jf;
     JLabel displayLabel;
     JButton sevenButton;
@@ -200,34 +204,142 @@ import javax.swing.SwingConstants;
     @Override
     public void actionPerformed(ActionEvent e) {
    if(e.getSource()==sevenButton){
-       if(isOpratorClicked){
+       if (isOpratorClicked) {
            displayLabel.setText("7");
            isOpratorClicked=false;
        }else{
            displayLabel.setText(displayLabel.getText()+"7");
-       }
-   }else if(e.getSource()==eightButton){
+    }
+       }else if (e.getSource()==eightButton) {
            if(isOpratorClicked){
                displayLabel.setText("8");
                isOpratorClicked=false;
-
            }else{
-               displayLabel.setText(displayLabel.getText()+"8");
-           }
-}else if(e.getSource()==equaltoButton){
-   String newValue=displayLabel.getText();
-   float oldValueF=Float.parseFloat(oldValue);
-   float newValueF=Float.parseFloat(newValue);
-   float result=oldValueF+newValueF;
-   displayLabel.setText(result+"");
-}else if(e.getSource()==clearButton){
-    displayLabel.setText(" ");
-}else if(e.getSource()==addingButton){
+        displayLabel.setText(displayLabel.getText()+("8"));
+           }   
+       } else if(e.getSource()==nineButton){
+       
+       if(isOpratorClicked) {
+                 displayLabel.setText("9");
+                 isOpratorClicked=false;
+
+        } else{
+            displayLabel.setText(displayLabel.getText()+("9"));}
+        }
+           else if(e.getSource()==sixButton){
+            if(isOpratorClicked){
+            displayLabel.setText("6");
+            isOpratorClicked=false;
+
+         }else{
+             displayLabel.setText(displayLabel.getText()+6);
+         }
+
+        }
+        else if(e.getSource()==fiveButton){
+       if(isOpratorClicked){
+             displayLabel.setText("5");
+             isOpratorClicked=false;
+
+         }else{
+             displayLabel.setText(displayLabel.getText()+"5");
+         }    
+     }
+     else if (e.getSource()==fourButton) {
+        if (isOpratorClicked) {
+            displayLabel.setText("4");
+            isOpratorClicked=false;
+            
+        }else{
+            displayLabel.setText(displayLabel.getText()+"4");
+        }
+        
+    }else if(e.getSource()==threeButton){
+        if(isOpratorClicked){
+            displayLabel.setText("3");
+            isOpratorClicked=false;
+        }else{
+            displayLabel.setText(displayLabel.getText()+"3");
+        }
+    }else if(e.getSource()==twoButton){
+        if(isOpratorClicked){
+            displayLabel.setText("2");
+            isOpratorClicked=false;
+        }else{
+            displayLabel.setText(displayLabel.getText()+"2");
+        }
+    }else if(e.getSource()==oneButton){
+        if(isOpratorClicked){
+        displayLabel.setText("1");
+        isOpratorClicked=false;
+        }else{
+            displayLabel.setText(displayLabel.getText()+"1");
+        }
+     
+    
  
- isOpratorClicked=true; 
- oldValue=displayLabel.getText();
-}
+    }else if(e.getSource()==equaltoButton){
+    String newValue=displayLabel.getText();
+    float oldValueF=Float.parseFloat(oldValue);
+    float newValueF=Float.parseFloat(newValue);
+    if (subst==true) {
+        result=oldValueF - newValueF;
+        displayLabel.setText(Float.toString(result));
+    }
+    if (add==true) {
+        result=oldValueF+newValueF;
+        displayLabel.setText(Float.toString(result));
+        
+    }
+    if (multi==true) {
+        result=oldValueF*newValueF;
+        displayLabel.setText(Float.toString(result));
+        
+    }
+    if (divi==true) {
+        result=oldValueF/newValueF;
+        displayLabel.setText(Float.toString(result));
+        
+    }
 
+    
+  
+    
 
+       
+
+    }
+    else if(e.getSource()==clearButton){
+        displayLabel.setText(" ");
+    }
+    else if(e.getSource()==addingButton){
+        isOpratorClicked=true;
+    
+     oldValue= displayLabel.getText();
+    add=true;
+    
+    
+    
+    }
+    else if(e.getSource()==substractionButton){
+        isOpratorClicked=true;
+        oldValue=displayLabel.getText();
+        subst=true;
+
+        
+    }
+    else if(e.getSource()==multiButton){
+        isOpratorClicked=true;
+        oldValue=displayLabel.getText();
+        multi=true;
+     
+    }else if(e.getSource()==divitionButton){
+        isOpratorClicked=true;
+        oldValue=displayLabel.getText();
+        divi=true;
+        
+      
+    
+    }
     }
 }
